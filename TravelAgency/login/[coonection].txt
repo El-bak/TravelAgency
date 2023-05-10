@@ -1,0 +1,417 @@
+
+Compléter ce code faisant en sorte que lorsque l'utilisateur met son identifiant et son mot de passe, il pourra se connecter à son compte dont les donnée se trouve dans la base de donnée du nom de myoo_agency de la table user : <?php
+
+<?php
+
+$user = 'root';
+$pass = '';
+
+try 
+{
+  
+  $db = new PDO ('mysql:host=localhost;dbname=myoo_agency', $user, $pass);
+  
+  {
+
+  }
+
+}
+ catch (PDOException $e) 
+{
+  print "Erreur :" . $e->getMessage() . "<br/>";
+  die;
+}
+
+
+
+?>
+
+----------------------------------------------X------------------------------------------ https://www.fram.fr/
+
+
+Chatgpt : 
+
+$query = "SELECT * FROM users WHERE nickname = :nickname AND mot_de_passe = :mot_de_passe";
+  $stmt = $db->prepare($query);
+  $stmt->bindParam(':nickname', $user);
+  $stmt->bindParam(':mot_de_passe', $pass);
+  $stmt->execute();
+  $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  if ($result) {
+    echo "Connexion réussie !";
+  } else {
+    echo "Identifiant ou mot de passe incorrect.";
+  }
+
+---------------------------------x--------------------
+$q = $db->query("SELECT * FROM users");
+  while ($user = $q->fetch()) {
+    var_dump($user);
+  }
+
+------------------------------------X--------------------------------------------------------------
+
+
+
+Modifier ce code pour remplacer Adresse par numéro de téléphone : <label for="Adresse">Votre adresse</label> <!---->
+         <input style="height: 30px; width:220px;" type="text" name="Adresse" required>
+
+<label for="telephone">Votre numéro de téléphone</label> <!---->
+<input style="height: 30px; width:220px;" type="tel" name="telephone" required>
+
+J'ai remplacé "Adresse" par "telephone" dans le label et le name de l'input, et j'ai également changé le type d'entrée en "tel" pour restreindre la saisie de caractères non-numériques.
+
+
+
+
+yazloumissaruto06@gmail.com
+Modifier ce code pour remplacer prenom par adresse : <br>
+         <label for="prenom">Prénom</label> <!---->
+         <input style="height: 30px; width:220px;" type="text" name="prenom" required>
+<br>
+<label for="adresse">Adresse</label> <!---->
+<input style="height: 30px; width:220px;" type="text" name="adresse" required>
+J'ai remplacé "prenom" par "adresse" dans le label et le name de l'input.
+
+
+
+
+yazloumissaruto06@gmail.com
+Modifier ce code pour remplacer prenom par adresse : function firstname () {
+ global $Erreur_tableau ;
+if (!isset($_POST['prenom'])){
+  $Erreur_tableau['error_pas_de_prenom']= 'Veullez saisir un prenom';
+  return false ;
+ }
+ else if($_POST['prenom']==''){
+  $Erreur_tableau['error_aucun_resultat']= 'Veuillez saisir un prenom';
+  return false ;
+ }
+ else {
+  if (preg_match("%[^A-Za-z]%", $_POST['prenom'])){ //preg_match ("")
+    $Erreur_tableau['error_aucune_lettre']= 'Votre prenom ne doit contenir que des lettres';
+    return false ;
+  }
+ }
+ return true ;
+}
+function address() {
+global $Erreur_tableau ;
+if (!isset($_POST['adresse'])){
+$Erreur_tableau['error_pas_d_adresse']= 'Veuillez saisir une adresse';
+return false ;
+}
+else if($_POST['adresse']==''){
+$Erreur_tableau['error_aucun_resultat']= 'Veuillez saisir une adresse';
+return false ;
+}
+return true ;
+}
+
+J'ai remplacé la fonction "firstname" par "address", et j'ai modifié les messages d'erreur pour correspondre à une adresse plutôt qu'à un prénom. J'ai également modifié les noms de variables en conséquence.
+
+
+
+
+yazloumissaruto06@gmail.com
+Modifier ce code pour remplacer prenom par numéro de téléphone : function firstname () {
+ global $Erreur_tableau ;
+if (!isset($_POST['prenom'])){
+  $Erreur_tableau['error_pas_de_prenom']= 'Veullez saisir un prenom';
+  return false ;
+ }
+ else if($_POST['prenom']==''){
+  $Erreur_tableau['error_aucun_resultat']= 'Veuillez saisir un prenom';
+  return false ;
+ }
+ else {
+  if (preg_match("%[^A-Za-z]%", $_POST['prenom'])){ //preg_match ("")
+    $Erreur_tableau['error_aucune_lettre']= 'Votre prenom ne doit contenir que des lettres';
+    return false ;
+  }
+ }
+ return true ;
+}
+function telephone() {
+global $Erreur_tableau ;
+if (!isset($_POST['telephone'])){
+$Erreur_tableau['error_pas_de_telephone']= 'Veullez saisir un numéro de téléphone';
+return false ;
+}
+else if($_POST['telephone']==''){
+$Erreur_tableau['error_aucun_resultat']= 'Veuillez saisir un numéro de téléphone';
+return false ;
+}
+else {
+if (!preg_match("/^[0-9]*$/", $_POST['telephone'])) { //preg_match pour n'autoriser que les caractères numériques
+$Erreur_tableau['error_format_telephone']= 'Votre numéro de téléphone ne doit contenir que des chiffres';
+return false ;
+}
+}
+return true ;
+}
+
+J'ai remplacé la fonction "firstname" par "telephone", et j'ai modifié les messages d'erreur pour correspondre à un numéro de téléphone plutôt qu'à un prénom. J'ai également ajouté une condition pour vérifier que le numéro de téléphone ne contient que des caractères numériques.
+
+
+
+
+yazloumissaruto06@gmail.com
+Fatal error: Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '0' for key 'PRIMARY' in C:\xampp\htdocs\TravelAgency\login\Inscription.php:159 Stack trace: #0 C:\xampp\htdocs\TravelAgency\login\Inscription.php(159): PDOStatement->execute(Array) #1 {main} thrown in C:\xampp\htdocs\TravelAgency\login\Inscription.php on line 159
+Cette erreur est générée lorsqu'une tentative est faite pour insérer une ligne dans une table avec une clé primaire (PRIMARY KEY) qui a déjà une valeur existante dans cette table. Dans ce cas, la valeur "0" est déjà présente dans la colonne clé primaire.
+
+Pour résoudre cette erreur, vous pouvez vérifier si la table a des valeurs enregistrées et s'il existe déjà une ligne avec la valeur "0" dans la colonne clé primaire. Si c'est le cas, vous pouvez supprimer la ligne en question ou modifier sa clé primaire avant de procéder à une nouvelle insertion de données.
+
+Si la table est vide ou si vous n'êtes pas sûr de la ligne à supprimer ou à modifier, vous pouvez également réinitialiser la valeur de la clé primaire en modifiant la colonne pour autoriser la valeur NULL, puis en réinitialisant la colonne pour autoriser une nouvelle fois les valeurs non-NULL et en lui attribuant un nouvel increment.
+
+Il est également important de vérifier si le code d'insertion de données a des erreurs ou des incohérences qui pourraient conduire à l'insertion de doublons dans la table.
+
+
+
+
+yazloumissaruto06@gmail.com
+#1451 - Cannot delete or update a parent row: a foreign key constraint fails (`myoo_agency`.`reservation`, CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`Id_1`) REFERENCES `client` (`Id`))
+Cette erreur se produit lorsque vous essayez de supprimer une ligne dans une table parent qui a des enfants liés à elle via une contrainte de clé étrangère.
+
+Dans ce cas, la table "reservation" contient une contrainte de clé étrangère (FK) qui référence la colonne "Id" de la table "client" en tant que clé parente. Cela signifie que chaque enregistrement de la table "reservation" doit avoir une correspondance valide dans la table "client".
+
+Si vous essayez de supprimer une ligne dans la table "client" qui a des enregistrements correspondants dans la table "reservation", vous obtiendrez cette erreur. La suppression de la ligne parente entraînera la suppression des enregistrements enfants correspondants dans la table "reservation", ce qui entraînera une violation de la contrainte de clé étrangère.
+
+Pour résoudre cette erreur, vous devez d'abord supprimer les enregistrements enfants correspondants dans la table "reservation" avant de supprimer la ligne parente dans la table "client". Vous pouvez également modifier la contrainte de clé étrangère pour autoriser la suppression en cascade des enregistrements enfants correspondants lorsqu'une ligne parente est supprimée.
+
+
+
+
+yazloumissaruto06@gmail.com
+Corriger les erreurs de ce code : $q = $db->prepare("INSERT INTO client(nom, prenom, nickname, email, Adresse, Num_Tel, mot_de_passe, date_de_naissance) VALUES(:nom,:prenom,:nickname,:email,:Adresse,:Num_Tel,:mot_de_passe,:date_de_naissance)");
+$q->execute([
+    'nom' =>'',
+    'prenom' =>'',
+    'nickname' =>'',
+    'email' =>'',
+    'Adresse' =>'',
+    'Num_Tel' =>'',
+    'mot_de_passe' =>'',
+    'date_de_naissance' =>''
+]);
+Le code ci-dessus ne contient pas d'erreur syntaxique, mais il est probablement erroné car il insère des valeurs vides pour chaque colonne dans la table "client".
+
+Pour corriger cela, vous devez remplacer les valeurs vides dans le tableau associatif avec les valeurs réelles que vous souhaitez insérer dans la table "client". Par exemple:
+
+bash
+Copy code
+$q = $db->prepare("INSERT INTO client(nom, prenom, nickname, email, Adresse, Num_Tel, mot_de_passe, date_de_naissance) VALUES(:nom,:prenom,:nickname,:email,:Adresse,:Num_Tel,:mot_de_passe,:date_de_naissance)");
+$q->execute([
+    'nom' =>'Doe',
+    'prenom' =>'John',
+    'nickname' =>'jdoe',
+    'email' =>'jdoe@example.com',
+    'Adresse' =>'123 Main St',
+    'Num_Tel' =>'555-1234',
+    'mot_de_passe' =>'secret',
+    'date_de_naissance' =>'1990-01-01'
+]);
+Notez que les valeurs ci-dessus ne sont que des exemples et doivent être remplacées par les valeurs réelles que vous souhaitez insérer dans la table.
+
+
+
+
+yazloumissaruto06@gmail.com
+Y'a t-il- des erreurs avec ce code, si oui, corriger-les : <?php
+$user = 'root';
+$pass = '';
+
+try {
+  $db = new PDO('mysql:host=localhost;dbname=myoo_agency', $user, $pass);
+  $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  echo "Connection > OK !";
+  // Vérifier si l'utilisateur existe dans la table "user"
+  $query = "SELECT * FROM client WHERE nickname = :nickname AND mot_de_passe = :mot_de_passe";
+  $stmt = $db->prepare($query);
+  $stmt->bindParam(':nickname', $user);
+  $stmt->bindParam(':mot_de_passe', $pass);
+  $stmt->execute();
+  $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  if ($result) {
+    echo "Connexion réussie !";
+  } else {
+    echo "Identifiant ou mot de passe incorrect.";
+  }
+} catch (PDOException $e) {
+  echo "Erreur lors de la connexion à la base de données : " . $e->getMessage();
+}
+?>
+Il n'y a pas d'erreurs syntaxiques dans le code, mais il y a une erreur logique dans la vérification des identifiants et mots de passe. Les variables $user et $pass sont utilisées pour définir les identifiants de connexion à la base de données, mais elles sont également utilisées pour la vérification des identifiants et mots de passe dans la requête SQL. Cela peut entraîner des erreurs si l'utilisateur et le mot de passe ne correspondent pas à ceux définis pour la connexion à la base de données. Il est recommandé d'utiliser des noms de variables différents pour les identifiants de connexion à la base de données et pour les identifiants et mots de passe fournis par l'utilisateur.
+
+Voici une version corrigée du code :
+
+php
+Copy code
+$db_user = 'root';
+$db_pass = '';
+
+try {
+  $db = new PDO('mysql:host=localhost;dbname=myoo_agency', $db_user, $db_pass);
+  $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  echo "Connection > OK !";
+  // Vérifier si l'utilisateur existe dans la table "client"
+  $query = "SELECT * FROM client WHERE nickname = :nickname AND mot_de_passe = :mot_de_passe";
+  $stmt = $db->prepare($query);
+  $user = 'utilisateur'; // exemple d'utilisateur fourni par l'utilisateur
+  $pass = 'motdepasse'; // exemple de mot de passe fourni par l'utilisateur
+  $stmt->bindParam(':nickname', $user);
+  $stmt->bindParam(':mot_de_passe', $pass);
+  $stmt->execute();
+  $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  if ($result) {
+    echo "Connexion réussie !";
+  } else {
+    echo "Identifiant ou mot de passe incorrect.";
+  }
+} catch (PDOException $e) {
+  echo "Erreur lors de la connexion à la base de données : " . $e->getMessage();
+}
+
+
+
+yazloumissaruto06@gmail.com
+comment faire pour faire en sorte de voir le mot de passe qu'on est entrain de mettre
+Il est généralement considéré comme une mauvaise pratique de permettre aux utilisateurs de voir les caractères qu'ils tapent dans un champ de mot de passe, car cela peut représenter un risque pour la sécurité de leur compte. En effet, une personne mal intentionnée pourrait regarder par-dessus l'épaule de l'utilisateur et voir son mot de passe.
+
+Cependant, si vous souhaitez quand même permettre aux utilisateurs de voir les caractères qu'ils tapent dans un champ de mot de passe, vous pouvez modifier le type de champ "password" en "text" dans le code HTML de la page, comme ceci :
+
+html
+Copy code
+<input type="text" name="mot_de_passe">
+Cela affichera les caractères du mot de passe en clair dans le champ. Cependant, gardez à l'esprit que cela présente un risque de sécurité et que vous devriez en informer les utilisateurs de ce risque.
+
+
+
+
+yazloumissaruto06@gmail.com
+Compléter ce code faisant en sorte que lorsque l'utilisateur s'inscrit, ces données soit insérer ou transférer dans la base de donnée du nom de myoo_agency de la table client : $q = $db->prepare("INSERT INTO client(nom, prenom, nickname, email, Adresse, Num_Tel, mot_de_passe, date_de_naissance) VALUES(:nom,:prenom,:nickname,:email,:Adresse,:Num_Tel,:mot_de_passe,:date_de_naissance)");
+$q->execute([
+    'nom' =>'',
+    'prenom' =>'',
+    'nickname' =>'',
+    'email' =>'',
+    'Adresse' =>'',
+    'Num_Tel' =>'',
+    'mot_de_passe' =>'',
+    'date_de_naissance' =>''
+]);
+Il faut compléter le code en remplaçant les chaînes de caractères vides dans le tableau associatif passé en argument de la méthode execute() par les données fournies par l'utilisateur, par exemple en utilisant les variables $_POST si les données ont été envoyées via un formulaire :
+
+php
+Copy code
+$q = $db->prepare("INSERT INTO client(nom, prenom, nickname, email, Adresse, Num_Tel, mot_de_passe, date_de_naissance) VALUES(:nom,:prenom,:nickname,:email,:Adresse,:Num_Tel,:mot_de_passe,:date_de_naissance)");
+$q->execute([
+    'nom' => $_POST['nom'],
+    'prenom' => $_POST['prenom'],
+    'nickname' => $_POST['nickname'],
+    'email' => $_POST['email'],
+    'Adresse' => $_POST['Adresse'],
+    'Num_Tel' => $_POST['Num_Tel'],
+    'mot_de_passe' => $_POST['mot_de_passe'],
+    'date_de_naissance' => $_POST['date_de_naissance']
+]);
+Bien entendu, il faut s'assurer que les données ont été correctement validées et nettoyées avant d'être insérées dans la base de données pour éviter les attaques de type injection SQL ou XSS. Il est également recommandé d'utiliser des requêtes préparées pour éviter ces vulnérabilités.
+
+
+
+
+yazloumissaruto06@gmail.com
+ Erreur de requête:
+#1833 - Cannot change column 'Id': used in a foreign key constraint 'reservation_ibfk_2' of table 'myoo_agency.reservation'
+Cette erreur se produit lorsque vous essayez de modifier la structure de la table client en modifiant la colonne Id, qui est utilisée dans la contrainte de clé étrangère de la table reservation.
+
+Si vous souhaitez modifier la colonne Id de la table client, vous devez d'abord supprimer la contrainte de clé étrangère dans la table reservation, puis modifier la colonne Id dans la table client, et enfin recréer la contrainte de clé étrangère dans la table reservation en utilisant la nouvelle colonne Id de la table client.
+
+Voici les étapes à suivre pour résoudre cette erreur:
+
+Supprimez la contrainte de clé étrangère dans la table reservation en utilisant la commande ALTER TABLE :
+
+sql
+Copy code
+ALTER TABLE reservation DROP FOREIGN KEY reservation_ibfk_2;
+Modifiez la colonne Id dans la table client en utilisant la commande ALTER TABLE :
+
+sql
+Copy code
+ALTER TABLE client MODIFY COLUMN Id INT NOT NULL AUTO_INCREMENT;
+Recréez la contrainte de clé étrangère dans la table reservation en utilisant la nouvelle colonne Id de la table client en utilisant la commande ALTER TABLE :
+
+sql
+Copy code
+ALTER TABLE reservation ADD FOREIGN KEY (Id_1) REFERENCES client(Id);
+Après avoir effectué ces modifications, vous devriez pouvoir modifier la colonne Id de la table client sans rencontrer l'erreur de requête.
+
+
+---------------------------------------------------------X-------------------------------------------
+
+<?php 
+         $query = "SELECT * FROM client WHERE nickname = :nickname, nom = :nom, Adresse = :Adresse AND date_de_naissance = :date_de_naissance";
+          $stmt = $db->prepare($query);
+          $stmt->bindParam(':nickname');
+          $stmt->bindParam(':nom');
+          $stmt->bindParam(':Adresse');
+          $stmt->bindParam('date_de_naissance');
+          $stmt->execute();
+          $result = $stmt->fetch(PDO::FETCH_ASSOC); 
+          ?>
+
+		<?php 
+		$nickname = '';
+		$nom = '';
+		$Adresse = '';
+		$date_de_naissance = '';
+		?>
+		<p>Pseudo : <?php echo $nickname; ?></p>
+		<p>Nom : <?php echo $nom; ?></p>
+		<p>Date de naissance : <?php echo $date_de_naissance; ?></p>
+        <p>Adresse : <?php echo $Adresse; ?></p>
+
+
+------------------------------------------------------------X----------------------------------------
+
+$_SESSION['nickname'] = "";
+   $_SESSION['date_de_naissance'] = "";
+   $_SESSION['Adresse'] = "";
+   $_SESSION['nom'] = "";
+
+   echo $_SESSION['nickname'];
+-------------------------------------------------------X
+USE myoo_agency
+DELIMITER //
+CREATE PROCEDURE 
+BEGIN
+SELECT Adresse, nom, date_de_naissance, nickname, mot_de_passe FROM myoo_agency.client WHERE nickname = username AND mot_de_passe = pass;
+END //
+DELIMITER
+
+-------------------------X---------------
+
+ery = "SELECT * FROM client WHERE nickname = :nickname AND nom = :nom AND Adresse = :Adresse AND date_de_naissance = :date_de_naissance";
+          $stmt = $db->prepare($query);
+          $stmt->bindParam(':nickname',$username,PDO::PARAM_STR);
+          $stmt->bindParam(':nom',$nickname,PDO::PARAM_STR);
+          $stmt->bindParam(':Adresse',$Adresse,PDO::PARAM_STR);
+          $stmt->bindParam('date_de_naissance',$date_de_naissance,PDO::PARAM_STR);
+          $stmt->execute();
+          $stmt->setFetchMode(PDO::FETCH_ASSOC); 
+           
+-------------------------
+
+
+    "adresse" => $tab['Adresse'], 
+    "nom" => $tab['nom'],
+    "date" => $tab['date_de_naissance'
+
+
+-----------------------
+
+$_SESSION['nickname'] = "";
+

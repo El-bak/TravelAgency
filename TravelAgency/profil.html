@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Page de profil</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="container">
+		<h1>Mon profil</h1>
+		<?php 
+			$nickname = "nickname";
+			$date_de_naissance = "01/01/2000";
+		?>
+		<p>Nickname : <?php echo $pseudo; ?></p>
+		<p>Date de naissance : <?php echo $date_de_naissance; ?></p>
+	</div>
+</body>
+</html>
+
+<style>
+.container {
+	max-width: 600px;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+h1 {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+p {
+	font-size: 18px;
+	line-height: 1.5;
+	margin-bottom: 10px;
+}
+</style>
+
